@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbqxhx11eji74"]
+
+[ext_resource type="Script" uid="uid://sxhqljibty0u" path="res://object.gd" id="1_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+shading_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+material = SubResource("StandardMaterial3D_0xm2m")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+no_depth_test = true
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_lquwl"]
+material = SubResource("StandardMaterial3D_1bvp3")
+radius = 0.125
+height = 0.25
+radial_segments = 12
+rings = 5
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_ig7tw")
+
+[node name="Cube" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Pointmass" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_lquwl")
