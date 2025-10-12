@@ -1,3 +1,6 @@
+# Pre-existing ignores
+/android/
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
