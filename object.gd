@@ -1,5 +1,5 @@
 extends Node3D
-class_name Object3D
+class_name Movject3D ## A physics scene object that can move.
 
 @export_category("Kinematics")
 @export var velocity :Vector3 ## Current change in the velocity of the object with respect to time.
