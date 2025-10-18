@@ -7,9 +7,14 @@ class_name Physcene
 @export var time_bound :Vector2= Vector2(0,0) ## The minimum (x) and maximum (y) values for [member time]. Doesn't state the [member time_bounds_used].
 @export_enum("None:0", "Lower:1","Upper:2", "Both:3") var time_bounds_used :int= 1 ## The [member time_bound]s being used.
 @export var time_scale :float= 1 ## The scale at which [member time] changes. Pausing is separate of this.
-@export var paused :bool= false ## If [member time] is to stay constant. Your [member time_scale] is saved elsewhere.
+@export var paused :bool= true ## If [member time] is to stay constant. Your [member time_scale] is saved elsewhere.
 
 signal time_changed(del: float)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		paused = not paused
+	$Physicam.check_input(event)
 
 func _process(delta: float) -> void:
 	if time_bounds_used % 4 == 3 and time_bound.x == time_bound.y:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbqxhx11eji74"]
+[gd_scene load_steps=10 format=3 uid="uid://cbqxhx11eji74"]
 
 [ext_resource type="Script" uid="uid://bndtsfy3nfjcl" path="res://physcene.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://sxhqljibty0u" path="res://object.gd" id="1_ig7tw"]
@@ -29,18 +29,21 @@ func _on_time_changed(del: float) -> void:
 	text = \"t= \" + str(del)
 "
 
+[sub_resource type="TorusMesh" id="TorusMesh_h2yge"]
+inner_radius = 0.8
+outer_radius = 1.6
+
 [node name="Physcene" type="Node3D"]
 script = ExtResource("1_0xm2m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, -2, -4, 1, 5, 5, 5)
-rotation_edit_mode = 2
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 5, 5, 5)
 light_color = Color(1, 1, 0.933333, 1)
 light_indirect_energy = 0.0
 directional_shadow_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 2.5, 0, 4.33)
+[node name="Physicam" type="Camera3D" parent="."]
+transform = Transform3D(0.70710677, -0.35355338, 0.6123724, 0, 0.8660254, 0.5, -0.70710677, -0.35355338, 0.6123724, 1.768, 2.5, 1.768)
 script = ExtResource("2_h2yge")
 
 [node name="Movject" type="Node3D" parent="."]
@@ -50,6 +53,7 @@ script = ExtResource("1_ig7tw")
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="Pointmass" type="MeshInstance3D" parent="Movject"]
+visible = false
 mesh = SubResource("SphereMesh_lquwl")
 
 [node name="Label" type="Label" parent="."]
@@ -59,5 +63,9 @@ text = "t=?"
 horizontal_alignment = 3
 vertical_alignment = 3
 script = SubResource("GDScript_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.25, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_h2yge")
 
 [connection signal="time_changed" from="." to="Label" method="_on_time_changed"]
